@@ -1,0 +1,51 @@
+@charset "UTF-8";
+/*------------------------------------*\
+    STYLE.CSS
+\*------------------------------------*/
+/**
+ *
+ * sass --watch system.scss:grid.min.css --style compressed
+ *
+ * Here we include the csswizardry-grids framework, then add our
+ * project-specific components afterwards.
+ */
+
+/**
+ * Setup
+ */
+@import "_vars";
+@import "_normalize";
+@import "csswizardry-grids";
+
+img {
+	height: auto;
+	max-width: 100%; 
+	width: auto;
+}
+/**
+ * Utilities
+ */
+.center {
+	display: block;
+	margin: auto;
+	text-align: center;
+}
+/**
+ * Add "not-" before a device name to hide it
+ * Use center-[device name] to center an element
+ */
+@each $breakpoint in $breakpoints{
+	$name: nth($breakpoint, 1);
+	@include grid-media-query( $name ) {
+		.not-#{$name} { display: none; }
+		.center-#{$name} {
+			display: block;
+			margin: auto;
+		}
+	}
+}
+/* Define media-queries using named break points
+@include grid-media-query("palm") {
+	.top-beam { display: none; }
+}
+*/

@@ -1,0 +1,49 @@
+/**
+ * Overall height layout
+ */
+html, body {
+	height: 100%;
+}
+//.grid div:first-child { min-height: 100%; }
+
+/**
+ * Fonts
+ */
+p {
+	font-size: 1rem;
+	margin: 0;
+	text-transform: uppercase;
+}
+
+/**
+ * The template aspect of Visual Wordpress
+ */
+.template {
+	background: none repeat scroll 0 0 #EEE;
+	border-radius: 3px 3px 3px 3px;
+	padding: 3px;
+}
+	.template > div {
+		background-color: #FFF;
+		border: 1px solid #CACACA;
+	}
+	header {
+		background-color: rgba(darken($base-color, 10%), .45);
+		//height: 20%; sat by js
+	}
+	nav {
+		background-color: rgba(lighten($base-color, 10%), .45);
+		//height: 10%; sat by js
+	}
+	aside {
+		background-color: rgba(adjust-hue( $base-color, 20% ), .45);
+		//height: 50%; sat by js
+	}
+	.content {
+		background-color: rgba(lighten($base-color, 40%), .45);
+		//height: 50%; sat by js
+	}
+	footer {
+		background-color: rgba( $base-color, .45);
+		//height: 20%; sat by js
+	}

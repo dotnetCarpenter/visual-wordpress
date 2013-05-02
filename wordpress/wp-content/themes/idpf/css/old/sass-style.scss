@@ -1,0 +1,7 @@
+@import "csswizardry-grids";
+
+$use-markup-fix:false;
+
+body {
+	@extend %grid;
+}

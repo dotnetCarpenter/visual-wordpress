@@ -1,0 +1,5 @@
+/**
+ * Hacks
+ */
+/* Proposed removal of white space: https://github.com/dotnetCarpenter/white-space */
+.grid__item { white-space: none; }

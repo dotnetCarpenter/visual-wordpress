@@ -1,0 +1,63 @@
+/**
+ * Hacks
+ */
+/* Proposed removal of white space: https://github.com/dotnetCarpenter/white-space */
+.grid__item { white-space: none; }
+
+/* Fix navigation alignment for the top menu on small screens */
+@media only screen and (max-width: 480px) {
+	.menu.center {
+		text-align: start;
+	}
+}
+
+/* Force word press elements to stay inside their container */
+.wp-caption { max-width: 100%; }
+
+
+/**
+ * Navigation
+ * inspired by http://csswizardry.com/2011/09/the-nav-abstraction/
+ */
+.menu {
+    list-style:none;
+    padding-left: 0;
+}
+    .menu > li,
+        .menu > li > a{
+            display:inline-block;
+           *display:inline;
+            zoom:1;
+    }
+
+
+/**
+ * Site specific CSS
+ * I have organized the CSS top down, as in the first thing you see on the page is the first CSS here.
+ * This is not the best way to organize CSS but it should make it fairly easy to follow.
+ */
+.top-beam {
+	background-color: #661C2D;
+	height: 1.6875em;
+}
+
+.menu {
+	border-bottom: 1px dotted #4C4C4C;
+	border-top: 1px dotted #4C4C4C;
+}
+	.menu a {
+		color: #616B5B;
+		font-size: 1.125rem;
+		line-height: 1.25rem;
+		padding: 0.1875rem 1.25rem;
+		text-decoration: none;
+		text-transform: uppercase;		
+	}
+	.menu a:hover { color: #222222; }
+	.current-menu-item a { color: #8A8C88;}
+
+.alignright {
+	float: right;
+}
+
+a { color: #84A374; }

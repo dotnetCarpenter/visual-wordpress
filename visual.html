@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<meta charset="utf-8"/>
+<title>Visual Wordpress</title>
+	<link rel="stylesheet" href="css/shame.css"/>
+	<link rel="stylesheet" href="css/grid.min.css"/>
+</head>
+<body class="grid">
+	<div class="grid__item three-quarters">
+		<section class="template">
+			<div class="template-background">
+				<div class="grid">
+					<div class="grid__item one-whole">
+						<header>
+							<p class="center">HEADER</p>
+						</header>
+					</div>
+					<div class="grid__item one-whole">
+						<nav>
+							<p class="center">NAVIGATION</p>
+						</nav>
+					</div>
+					<div class="grid__item one-sixth">
+						<aside class="sub-content">
+							<p>SUB CONTENT</p>
+						</aside>
+					</div>
+					<div class="grid__item three-sixths">
+						<section class="content">
+							<p class="center">CONTENT</p>
+						</section>
+					</div>
+					<div class="grid__item two-sixths">
+						<aside class="news">
+							<p>NEWS</p>
+						</aside>
+					</div>
+					<div class="grid__item one-whole">
+						<footer>
+							<p class="center">Footer</p>
+						</footer>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<div class="grid__item one-quarter">
+		<h2>Theme Files</h2> 
+	</div>
+	<script src="js/white-space.modern.js"></script>
+	<script src="js/underscore.js"></script>
+	<script>
+		"use strict"
+		var layout = {
+			heightEnum: {
+				viewport: 101
+			},
+			setHeight: function(elements, heights) {
+				var nodes = document.querySelectorAll(elements.join(', '));
+				var maxHeight = window.innerHeight;
+				_.each(nodes, function(node, i) {
+					switch (heights[i]) {
+						case this.heightEnum.viewport:
+							node.style.height = maxHeight + 'px';
+							break;
+						default: // default is values in percent
+							node.style.height = maxHeight * heights[i] / 100 + 'px';
+					}
+				}, this);
+			}
+		}
+		var elements = ['.template-background', 'header', 'nav', 'aside', '.content', 'footer'];
+		var heights = [layout.heightEnum.viewport, 20, 10, 50, 50, 50, 20];// aside is there twice
+
+		layout.setHeight(elements, heights);
+	</script>
+</body>
+</html>
