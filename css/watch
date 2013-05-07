@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ -n $1 ]
+then
+	$where=$1
+fi
+
 # Change `style.css` or `style.min.css` to whatever you would like your compiled
 # stylesheet to be called. Do not rename `system.scss` or alter references to it.
 
@@ -15,6 +20,6 @@
 # Minification
 #sass --watch system.scss:style.css --style compressed
 
-sass --watch system.scss:grid.min.css --style compressed
+sass --watch system.scss:$1grid.min.css --style compressed
 
 exit 0

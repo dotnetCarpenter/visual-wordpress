@@ -628,7 +628,7 @@ class WP_Rewrite {
 	 * @access public
 	 * @var bool
 	 */
-	var $use_verbose_rules = false;
+	var $use_verbose_rules = true;
 
 	/**
 	 * Could post permalinks be confused with those of pages?

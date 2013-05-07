@@ -58,21 +58,27 @@
 			setHeight: function(elements, heights) {
 				var nodes = document.querySelectorAll(elements.join(', '));
 				var maxHeight = window.innerHeight;
+				console.log((maxHeight);
 				_.each(nodes, function(node, i) {
 					switch (heights[i]) {
 						case this.heightEnum.viewport:
-							node.style.height = maxHeight + 'px';
+							node.height = maxHeight;
+							//node.style.height = maxHeight + 'px';
 							break;
 						default: // default is values in percent
-							node.style.height = maxHeight * heights[i] / 100 + 'px';
+							node.height = maxHeight * heights[i] / 100;
+							// node.style.height = maxHeight * heights[i] / 100 + 'px';
 					}
 				}, this);
 			}
 		}
 		var elements = ['.template-background', 'header', 'nav', 'aside', '.content', 'footer'];
 		var heights = [layout.heightEnum.viewport, 20, 10, 50, 50, 50, 20];// aside is there twice
-
-		layout.setHeight(elements, heights);
+		var container = window.frameElement || window;
+		container.addEventListener('resize', function resizelayout(){
+			layout.setHeight(elements, heights, container);
+		});
+		layout.setHeight(elements, heights, container);
 	</script>
 </body>
 </html>

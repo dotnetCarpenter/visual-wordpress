@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<meta charset="utf-8"/>
+<title>Visual Wordpress</title>
+	<link rel="stylesheet" href="css/shame.css"/>
+	<link rel="stylesheet" href="css/grid.min.css"/>
+</head>
+<body class="grid">
+	<div class="grid__item three-quarters">
+		<section class="template">
+			<div class="template-background">
+				<div class="grid">
+					<div class="grid__item one-whole">
+						<header>
+							<p class="center">HEADER</p>
+						</header>
+					</div>
+					<div class="grid__item one-whole">
+						<nav>
+							<p class="center">NAVIGATION</p>
+						</nav>
+					</div>
+					<div class="grid__item one-sixth">
+						<aside class="sub-content">
+							<p>SUB CONTENT</p>
+						</aside>
+					</div>
+					<div class="grid__item three-sixths">
+						<section class="content">
+							<p class="center">CONTENT</p>
+						</section>
+					</div>
+					<div class="grid__item two-sixths">
+						<aside class="news">
+							<p>NEWS</p>
+						</aside>
+					</div>
+					<div class="grid__item one-whole">
+						<footer>
+							<p class="center">Footer</p>
+						</footer>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<div class="grid__item one-quarter">
+		<h2>Theme Files</h2>
+		<ul id="visualWpFileTree" class="tree"></ul>
+	</div>
+	<script src="js/white-space.modern.js"></script>
+	<script src="js/underscore.min.js"></script>
+	<script>
+		(function(win, doc) {
+			"use strict"
+
+			/**
+			 * Set height of visual elements in template
+			 */
+			var layout = Layout(
+					['.template-background', 'header', 'nav', 'aside', '.content', 'footer']
+				  , [101, 20, 10, 50, 50, 50, 20]// aside is there twice
+				);
+			win.addEventListener("message", function resizelayout(m){
+				layout.setHeight(/*elements, heights, */m.data);
+			}, false);
+			layout.setHeight(/*elements, heights*/);
+
+
+			/**
+			 * Get theme files
+			 */
+			ajax(listTemplate, "theme/files");
+
+			/**
+			 * Build file tree
+			 */
+			function listTemplate(data) {
+				var temp = "<% _.each(data, function(item) { %><li><%= item %></li> <%});%>";
+				doc.getElementById('visualWpFileTree').innerHTML = _.template(temp, JSON.parse(data), { variable: 'data' });
+			}
+
+			function Layout(elements, heights) {		
+				return {
+					heightEnum: {
+						viewport: 101
+					},
+					setHeight: function(maxheight) {
+						var nodes = doc.querySelectorAll(elements.join(', '));
+						var maxHeight = maxheight || win.innerHeight;
+
+						_.each(nodes, function(node, i) {
+							switch (heights[i]) {
+								case this.heightEnum.viewport:
+									node.style.height = Math.floor(maxHeight) + 'px';
+									break;
+								default: // default is values in percent
+									node.style.height = Math.floor(maxHeight * heights[i] / 100) + 'px';
+							}
+						}, this);
+					}
+				};
+			}
+
+			function ajax(callback, url) {
+				var get = new win.XMLHttpRequest();
+				get.open('GET', url);
+				get.onreadystatechange = function() {
+					if ( this.readyState !== 4 || this.status !== 200 && this.status !== 304){
+						return;
+					}
+					if(this.responseText)
+						callback(this.responseText);
+				}
+				try {
+					get.send();
+				} catch (e) {}
+			}
+		}(window, document));
+	</script>
+</body>
+</html>
